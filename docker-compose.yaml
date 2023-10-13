@@ -1,0 +1,17 @@
+version: "3"
+services:
+  python-aws-suits:
+    container_name: container-aws-suits-310
+    env_file:
+      - .env
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+      target: debug
+    ports:
+      - "9999:8888"
+      - "5678:5678"
+    volumes:
+      - ./www:/var/www
+      - ${PROJECTS_FOLDER}:/var/www/projects
+    command: ["supervisord", "-n"]
