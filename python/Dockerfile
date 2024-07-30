@@ -1,10 +1,10 @@
-FROM centos:7.6.1810 as base
+FROM rockylinux:8 as base
 
-RUN yum -y install yum-plugin-priorities.noarch && \
-    yum -y upgrade && \
+# RUN yum -y install yum-plugin-priorities.noarch && \
+RUN yum -y upgrade && \
     yum -y install epel-release && \ 
     yum -y install supervisor git gcc gcc-c++ zip unzip openssh-server wget tar make && \
-    yum -y install openssl-devel openssl11 openssl11-libs openssl11-devel bzip2-devel libffi-devel python3-devel
+    yum -y install openssl-devel bzip2-devel libffi-devel python3-devel
 
 # Install Python 3.10 packages.
 ADD .ssh /root/.ssh
@@ -16,10 +16,9 @@ COPY requirements.txt /tmp/requirements.txt
 
 RUN chmod 755 /install_python.sh && \
     chmod 755 /etc/supervisord.d/debugpy.ini && \
-    sh /install_python.sh && \
-    pip3.10 install pip -U -i "https://mirrors.aliyun.com/pypi/simple/" && \
-    pip3.10 install -r /tmp/requirements.txt -i "https://mirrors.aliyun.com/pypi/simple/" && \
-    localedef -i en_US -f UTF-8 en_US.UTF-8
+    sh /install_python.sh
+RUN pip3.10 install pip -U -i "https://mirrors.aliyun.com/pypi/simple/" && \
+    pip3.10 install -r /tmp/requirements.txt -i "https://mirrors.aliyun.com/pypi/simple/"
 
 ###START NEW IMAGE: DEBUGGER ###
 FROM base as debug
