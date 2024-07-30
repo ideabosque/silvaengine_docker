@@ -8,6 +8,8 @@ services:
       context: ./python
       dockerfile: Dockerfile
       target: debug
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL}
     ports:
       - "9999:8888"
       - "5678:5678"
