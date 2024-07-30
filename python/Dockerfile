@@ -27,6 +27,7 @@ FROM base as debug
 RUN pip3.10 install debugpy -i "https://mirrors.aliyun.com/pypi/simple/"
 RUN python3.10 -m venv /var/python3.10/silvaengine/env && \
     source /var/python3.10/silvaengine/env/bin/activate && \
+    pip3.10 install pip -U -i "https://mirrors.aliyun.com/pypi/simple/" && \
     pip3.10 install -r /tmp/requirements.txt -i "https://mirrors.aliyun.com/pypi/simple/"
 
 WORKDIR /var/www/projects
