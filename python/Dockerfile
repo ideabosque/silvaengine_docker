@@ -9,14 +9,13 @@ ENV PYTHON=${PYTHON}
 RUN yum -y upgrade && \
     yum -y install epel-release && \ 
     yum -y install supervisor git gcc gcc-c++ zip unzip openssh-server wget tar make && \
-    yum -y install openssl-devel bzip2-devel libffi-devel && \
-    yum -y install python3.12-devel libxml2-devel libxslt-devel freetype-devel
+    yum -y install openssl-devel bzip2-devel libffi-devel
     
 ADD .ssh /root/.ssh
 RUN chmod 600 /root/.ssh/* && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-RUN yum -y install python3.12 python3.12-pip
+RUN yum -y install python3.12 python3.12-pip python3.12-devel libxml2-devel libxslt-devel freetype-devel
 
 ### START NEW IMAGE: DEBUGGER ###
 FROM base as debug
