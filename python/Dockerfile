@@ -1,6 +1,6 @@
 FROM rockylinux:8 as base
 
-# Set the environment variable for PyPI index URL
+# Set the environment variable for PyPI index URL and PYTHON
 ARG PIP_INDEX_URL
 ARG PYTHON
 ENV PIP_INDEX_URL=${PIP_INDEX_URL}
