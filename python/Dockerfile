@@ -2,7 +2,9 @@ FROM rockylinux:8 as base
 
 # Set the environment variable for PyPI index URL
 ARG PIP_INDEX_URL
+ARG PYTHON
 ENV PIP_INDEX_URL=${PIP_INDEX_URL}
+ENV PYTHON=${PYTHON}
 
 RUN yum -y upgrade && \
     yum -y install epel-release && \ 
@@ -14,22 +16,20 @@ ADD .ssh /root/.ssh
 RUN chmod 600 /root/.ssh/* && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-ADD debugpy.ini /etc/supervisord.d/debugpy.ini
-COPY requirements.txt /tmp/requirements.txt
-
-RUN chmod 755 /etc/supervisord.d/debugpy.ini
 RUN yum -y install python3.12 python3.12-pip
-RUN pip3.12 install pip -U -i "$PIP_INDEX_URL" && \
-    pip3.12 install -r /tmp/requirements.txt -i "$PIP_INDEX_URL"
 
 ### START NEW IMAGE: DEBUGGER ###
 FROM base as debug
 
-RUN pip3.12 install debugpy -i "$PIP_INDEX_URL"
+ADD debugpy.ini /etc/supervisord.d/debugpy.ini
+COPY requirements.txt /tmp/requirements.txt
 
-RUN python3.12 -m venv /var/python3.12/silvaengine/env && \
-    source /var/python3.12/silvaengine/env/bin/activate && \
-    pip3.12 install pip -U -i "$PIP_INDEX_URL" && \
-    pip3.12 install -r /tmp/requirements.txt -i "$PIP_INDEX_URL"
+RUN chmod 755 /etc/supervisord.d/debugpy.ini
+
+RUN $PYTHON -m venv /var/$PYTHON/silvaengine/env && \
+    source /var/$PYTHON/silvaengine/env/bin/activate && \
+    pip install pip -U -i "$PIP_INDEX_URL" && \
+    pip install debugpy -i "$PIP_INDEX_URL" && \
+    pip install -r /tmp/requirements.txt -i "$PIP_INDEX_URL"
 
 WORKDIR /var/www/projects
