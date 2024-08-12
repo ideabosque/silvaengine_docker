@@ -1,7 +1,7 @@
 version: "3"
 services:
   python-aws-suites:
-    container_name: container-aws-suites-312
+    container_name: container-aws-suites-311
     env_file:
       - .env
     build:

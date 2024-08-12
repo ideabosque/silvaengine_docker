@@ -15,7 +15,7 @@ ADD .ssh /root/.ssh
 RUN chmod 600 /root/.ssh/* && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-RUN yum -y install python3.12 python3.12-pip python3.12-devel libxml2-devel libxslt-devel freetype-devel
+RUN yum -y install python3.11 python3.11-pip python3.11-devel libxml2-devel libxslt-devel freetype-devel
 
 ### START NEW IMAGE: DEBUGGER ###
 FROM base as debug
