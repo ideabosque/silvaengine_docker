@@ -19,17 +19,18 @@ To commence, kindly adhere to the following steps:
 3. Establish a `.env` file in the root directory and populate it with the essential environment variables. You can employ the provided `.env.example` as a reference. Below is a sample of how your `.env` file should be configured:
     
     ```
-    LC_ALL=C.UTF-8
-    LANG=C.UTF-8
-    TZ=Asia/Chongqing
+    PIP_INDEX_URL=https://pypi.org/simple/ or https://mirrors.aliyun.com/pypi/simple/ (for China)
     PROJECTS_FOLDER={path to the projects folder}
+    PYTHON={python version}
     DEBUGPY={path to the debug Python file}
     
     ```
     
     **Example:**
     
+    - PIP_INDEX_URL: https://pypi.org/simple/
     - PROJECTS_FOLDER: "C:/Users/developer/GitHubRepos/silvaengine"
+    - PYTHON: python3.11
     - DEBUGPY: /var/www/projects/project_xyz/project_xyz/tests/test_project_xyz.py
 4. Initiate the Docker image build process by executing the subsequent command:
     
