@@ -1,4 +1,3 @@
-
 ## Introduction
 
 The primary objective behind configuring Docker Compose is to streamline the deployment of SilvaEngine and streamline the debugging process for projects built upon the SilvaEngine framework.
@@ -30,7 +29,7 @@ To commence, kindly adhere to the following steps:
     
     - PIP_INDEX_URL: https://pypi.org/simple/
     - PROJECTS_FOLDER: "C:/Users/developer/GitHubRepos/silvaengine"
-    - PYTHON: python3.11
+    - PYTHON: python3.12
     - DEBUGPY: /var/www/projects/project_xyz/project_xyz/tests/test_project_xyz.py
 4. Initiate the Docker image build process by executing the subsequent command:
     
