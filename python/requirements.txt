@@ -57,7 +57,8 @@ pyyaml
 openai
 redis
 orjson
-pyarrow==12.0.0
+pyarrow
+pytest
 git+https://github.com/ideabosque/silvaengine_utility.git@dev#egg=silvaengine_utility
 git+https://github.com/ideabosque/event_triggers.git@main#egg=event_triggers
 git+https://github.com/ideabosque/silvaengine_base.git@main#egg=silvaengine_base
