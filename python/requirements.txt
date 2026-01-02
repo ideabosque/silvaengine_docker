@@ -39,7 +39,6 @@ xmltodict
 dicttoxml
 pandas
 jsonpickle
-elasticsearch
 hubspot-api-client
 sentry-sdk
 pydocparser
